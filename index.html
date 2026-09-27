@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marco Giannini | Quello del pacco</title>
-    
-    <!-- Fonts: Inter per la leggibilità, Fira Code per il tocco "Tech/Linux" -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome per le icone (Aggiornato alla v6.5.2 per supportare il logo di X e Mastodon) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <style>
+<style>
         :root {
-            --bg-main: #0a0e17; /* Sfondo scuro profondo */
-            --bg-card: #111827; /* Sfondo elementi in rilievo */
+            --bg-main: #0a0e17; 
+            --bg-card: #111827; 
             --bg-card-hover: #1f2937;
-            --accent-color: #00ffcc; /* Verde acqua vivace / Cyan neon */
+            --accent-color: #00ffcc; 
             --accent-glow: rgba(0, 255, 204, 0.4);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
@@ -33,10 +18,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Rimuove l'evidenziazione blu al tap su iOS */
+            -webkit-tap-highlight-color: transparent; 
         }
 
         html {
             scroll-behavior: smooth;
+            /* Previene il ridimensionamento automatico del testo ruotando l'iPhone */
+            -webkit-text-size-adjust: 100%; 
         }
 
         body {
@@ -45,6 +34,9 @@
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
+            /* Ottimizza la nitidezza dei font su macOS/iOS */
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
         }
 
         header {
@@ -52,6 +44,8 @@
             top: 0;
             width: 100%;
             background: rgba(10, 14, 23, 0.85);
+            /* Aggiunto prefisso -webkit- per Safari */
+            -webkit-backdrop-filter: blur(10px); 
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -97,11 +91,13 @@
             letter-spacing: 1px;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-color);
+        /* Usiamo media (hover: hover) per evitare che lo stato hover rimanga bloccato su iOS dopo il tap */
+        @media (hover: hover) {
+            .nav-links a:hover {
+                color: var(--accent-color);
+            }
         }
 
-        /* Hamburger menu (Mobile) */
         .menu-toggle {
             display: none;
             color: var(--text-primary);
@@ -137,7 +133,9 @@
         }
 
         .hero {
-            height: 100vh;
+            /* Fix per l'altezza su iOS Safari: usa min-height e l'unità dinamica dvh */
+            min-height: 100vh;
+            min-height: 100dvh; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -145,7 +143,6 @@
             position: relative;
         }
 
-        /* Stile foto profilo */
         .profile-pic {
             width: 150px;
             height: 150px;
@@ -176,7 +173,7 @@
             color: var(--text-secondary);
             font-family: var(--font-tech);
             margin-bottom: 2rem;
-            min-height: 3rem; /* Spazio per l'effetto typing */
+            min-height: 3rem; 
         }
 
         .typing-cursor {
@@ -209,10 +206,12 @@
             z-index: 1;
         }
 
-        .btn:hover {
-            background: rgba(0, 255, 204, 0.1);
-            box-shadow: 0 0 15px var(--accent-glow);
-            transform: translateY(-3px);
+        @media (hover: hover) {
+            .btn:hover {
+                background: rgba(0, 255, 204, 0.1);
+                box-shadow: 0 0 15px var(--accent-glow);
+                transform: translateY(-3px);
+            }
         }
 
         .about-content {
@@ -250,9 +249,11 @@
             transition: var(--transition);
         }
 
-        .tech-tags span:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-glow);
+        @media (hover: hover) {
+            .tech-tags span:hover {
+                border-color: var(--accent-color);
+                box-shadow: 0 0 10px var(--accent-glow);
+            }
         }
 
         .projects-grid {
@@ -286,14 +287,16 @@
             transition: transform 0.4s ease;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            background: var(--bg-card-hover);
-            box-shadow: 0 10px 30px -15px rgba(0, 255, 204, 0.2);
-        }
+        @media (hover: hover) {
+            .card:hover {
+                transform: translateY(-10px);
+                background: var(--bg-card-hover);
+                box-shadow: 0 10px 30px -15px rgba(0, 255, 204, 0.2);
+            }
 
-        .card:hover::before {
-            transform: scaleX(1);
+            .card:hover::before {
+                transform: scaleX(1);
+            }
         }
 
         .card-icon {
@@ -373,9 +376,11 @@
             text-transform: uppercase;
         }
 
-        .card-link:hover {
-            gap: 0.8rem;
-            text-shadow: 0 0 8px var(--accent-glow);
+        @media (hover: hover) {
+            .card-link:hover {
+                gap: 0.8rem;
+                text-shadow: 0 0 8px var(--accent-glow);
+            }
         }
 
         .podcast-links {
@@ -391,10 +396,12 @@
             transition: var(--transition);
         }
 
-        .podcast-links a:hover {
-            color: var(--accent-color);
-            transform: translateY(-3px);
-            text-shadow: 0 0 8px var(--accent-glow);
+        @media (hover: hover) {
+            .podcast-links a:hover {
+                color: var(--accent-color);
+                transform: translateY(-3px);
+                text-shadow: 0 0 8px var(--accent-glow);
+            }
         }
 
         .social-grid {
@@ -423,9 +430,11 @@
             transition: var(--transition);
         }
 
-        .social-item:hover i, .social-item:hover {
-            color: var(--accent-color);
-            transform: translateY(-5px);
+        @media (hover: hover) {
+            .social-item:hover i, .social-item:hover {
+                color: var(--accent-color);
+                transform: translateY(-5px);
+            }
         }
 
         footer {
@@ -449,9 +458,11 @@
             transition: var(--transition);
         }
 
-        .social-links a:hover {
-            color: var(--accent-color);
-            transform: translateY(-3px);
+        @media (hover: hover) {
+            .social-links a:hover {
+                color: var(--accent-color);
+                transform: translateY(-3px);
+            }
         }
 
         .copyright {
@@ -467,6 +478,9 @@
                 left: 0;
                 width: 100%;
                 background: rgba(10, 14, 23, 0.95);
+                /* Aggiunto backdrop filter al menu mobile */
+                -webkit-backdrop-filter: blur(15px);
+                backdrop-filter: blur(15px);
                 flex-direction: column;
                 align-items: center;
                 padding: 2rem 0;
@@ -490,230 +504,3 @@
             }
         }
     </style>
-</head>
-<body>
-
-    <header>
-        <nav>
-            <a href="#" class="logo"><i class="fa-solid fa-terminal"></i> marco<span>giannini</span></a>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Chi Sono</a></li>
-                <li><a href="#progetti">Progetti</a></li>
-                <li><a href="#contatti">Contatti</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <img src="https://quellodelpacco.it/assets/img/marcogiannini.jpg" alt="Foto Profilo di Marco Giannini" class="profile-pic">
-        <p class="hero-prefix">~$ whoami</p>
-        <h1>Marco Giannini</h1>
-        <div class="subtitle">
-            <span id="typewriter-text"></span><span class="typing-cursor"></span>
-        </div>
-        <p style="color: var(--text-secondary); max-width: 500px; margin-bottom: 3rem;">
-            Specializzato in documentazione tecnica, amministrazione IT e divulgazione tecnologica. 
-            Appassionato del mondo open-source e della creatività digitale.
-        </p>
-        <div class="hero-buttons">
-            <a href="#progetti" class="btn">Scopri i miei progetti</a>
-            <a href="https://quellodelpacco.it/marcogiannini.github.io/curriculum/curriculum_giannini_marco.pdf" target="_blank" class="btn btn-outline"><i class="fa-solid fa-file-pdf"></i> Visualizza CV</a>
-        </div>
-    </section>
-
-    <section id="about">
-        <h2 class="section-title">01. Chi Sono</h2>
-        <div class="about-content">
-            <div>
-                <p>
-                    Ciao! Sono Marco Giannini. Il mio percorso si divide tra la gestione professionale e la profonda passione per la tecnologia. 
-                    Sono la mente e la voce dietro <span class="highlight">Marco's Box</span>, un ecosistema digitale (blog tech, podcast e canale YouTube) 
-                    dove condivido la mia esperienza e le mie scoperte nel mondo informatico.
-                </p>
-                <p>
-                    Sono un fiero sostenitore del panorama <span class="highlight">Open Source</span> e un utente appassionato di sistemi Linux. 
-                    Nel corso degli anni ho esplorato a fondo distribuzioni come <strong>Ubuntu, Arch Linux e Fedora</strong>, facendone non solo i miei strumenti 
-                    quotidiani, ma anche argomenti di divulgazione per aiutare altri utenti ad avvicinarsi a questo mondo.
-                </p>
-                <p>
-                    Dal punto di vista professionale, ho un solido background nella gestione di <strong>documentazione tecnica e amministrativa</strong>. 
-                    Le mie esperienze, in particolare presso <em>Fondedil S.r.l.</em> e nel settore dell'<em>amministrazione condominiale e immobiliare</em>, 
-                    mi hanno dotato di precisione, capacità di problem-solving e un'attitudine metodica che applico anche nei miei progetti digitali.
-                </p>
-            </div>
-            <div class="tech-tags">
-                <span>Linux (Ubuntu, Arch, Fedora)</span>
-                <span>Open Source</span>
-                <span>Tech Blogging</span>
-                <span>Podcasting</span>
-                <span>Video Editing</span>
-                <span>Technical Writing</span>
-                <span>SysAdmin Basics</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="progetti">
-        <h2 class="section-title">02. Progetti e Interessi</h2>
-        <div class="projects-grid">
-            
-            <div class="card">
-                <i class="fa-solid fa-box-open card-icon"></i>
-                <h3 class="card-title">Marco's Box</h3>
-                <p class="card-desc">
-                    Il mio progetto principale: un blog, un podcast e un canale YouTube dedicati al mondo tech, a Linux e all'open source. 
-                    Uno spazio dove la tecnologia viene spiegata, testata e discussa.
-                </p>
-                <a href="https://www.marcosbox.org" target="_blank" class="card-link">Visita Marco's Box <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-shield-halved card-icon"></i>
-                <h3 class="card-title">Privacy & Sicurezza</h3>
-                <p class="card-desc">
-                    Divulgazione focalizzata sulla sicurezza digitale e la privacy online. 
-                    Studio e condivido best practices, tool open-source e configurazioni per proteggere i propri dati nel web moderno.
-                </p>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-microphone-lines card-icon"></i>
-                <h3 class="card-title">Marco's Box Podcast</h3>
-                <p class="card-desc">
-                    Tech, Linux e Open Source in formato audio. Ascolta le ultime novità, guide, interviste e approfondimenti direttamente sulle tue piattaforme di streaming preferite.
-                </p>
-                <div class="podcast-links">
-                    <a href="https://open.spotify.com/show/0j07ry5YlVeaaT6LPSwBXI?si=2463c8e9645d4d47" target="_blank" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
-                    <a href="https://podcasts.apple.com/it/podcast/il-podcast-di-marcos-box/id1477330224" target="_blank" aria-label="Apple Podcasts"><i class="fa-solid fa-podcast"></i></a>
-                    <a href="https://www.youtube.com/@quellodelpacco/podcasts" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-heart card-icon"></i>
-                <h3 class="card-title">Hobby & Passioni</h3>
-                <p class="card-desc">
-                    Lontano (ma non troppo) dai monitor, mi piace esplorare mondi diversi e nutrire la mia curiosità. Le mie passioni principali includono:
-                </p>
-                <ul class="hobby-list">
-                    <li><i class="fa-solid fa-microchip"></i> Tecnologia e Innovazione</li>
-                    <li><i class="fa-solid fa-book-open"></i> Lettura</li>
-                    <li><i class="fa-solid fa-headphones-simple"></i> Musica</li>
-                    <li><i class="fa-solid fa-film"></i> Cinema</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="contatti">
-        <div class="contact-section">
-            <h2 class="section-title">03. Contatti</h2>
-            <p>
-                Sono sempre interessato a nuove collaborazioni, discussioni sull'open source o semplicemente per fare due chiacchiere su Linux e tecnologia. 
-                La mia inbox è sempre aperta!
-            </p>
-            <a href="mailto:giannini.marco@protonmail.com" class="btn"><i class="fa-solid fa-envelope"></i> Scrivimi un Messaggio</a>
-            
-            <div class="social-grid">
-                <a href="https://github.com/marcogiannini" target="_blank" class="social-item">
-                    <i class="fa-brands fa-github"></i>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://it.linkedin.com/pub/marco-giannini/51/979/a4a/" target="_blank" class="social-item">
-                    <i class="fa-brands fa-linkedin"></i>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://youtube.com/@quellodelpacco" target="_blank" class="social-item">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span>YouTube</span>
-                </a>
-                <a href="https://twitter.com/Marcooo83" target="_blank" class="social-item">
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <span>X</span>
-                </a>
-                <a href="https://mastodon.uno/@magi" target="_blank" class="social-item">
-                    <i class="fa-brands fa-mastodon"></i>
-                    <span>Mastodon</span>
-                </a>
-                <a href="https://t.me/marcosbox" target="_blank" class="social-item">
-                    <i class="fa-brands fa-telegram"></i>
-                    <span>Telegram</span>
-                </a>
-                <a href="https://www.facebook.com/pages/Marcos-Box/204256869707263" target="_blank" class="social-item">
-                    <i class="fa-brands fa-facebook"></i>
-                    <span>Facebook</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/marcogiannini" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://it.linkedin.com/pub/marco-giannini/51/979/a4a/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://youtube.com/@quellodelpacco" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://twitter.com/Marcooo83" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://mastodon.uno/@magi" target="_blank" aria-label="Mastodon"><i class="fa-brands fa-mastodon"></i></a>
-            <a href="https://t.me/marcosbox" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://www.facebook.com/pages/Marcos-Box/204256869707263" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        </div>
-        <p class="copyright">
-            <i class="fa-solid fa-code" style="color: var(--accent-color);"></i> & Progettato da Marco Giannini &copy; 2026.
-        </p>
-    </footer>
-
-    <script>
-        // Menu Mobile Toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            // Cambia icona
-            const icon = mobileMenu.querySelector('i');
-            if(navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            } else {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-        // Chiudi menu quando si clicca un link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                const icon = mobileMenu.querySelector('i');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            });
-        });
-
-        // Typewriter Effect per l'Hero Section
-        const textToType = "Content Creator | Tech Enthusiast | Open Source Advocate";
-        const typeContainer = document.getElementById('typewriter-text');
-        let index = 0;
-        let isTyping = true;
-
-        function typeWriter() {
-            if (index < textToType.length) {
-                typeContainer.innerHTML += textToType.charAt(index);
-                index++;
-                // Velocità random per simulare la battitura umana
-                setTimeout(typeWriter, Math.random() * 50 + 50); 
-            }
-        }
-
-        // Avvia l'effetto appena la pagina è caricata
-        window.addEventListener('load', () => {
-            setTimeout(typeWriter, 1000); // Piccola pausa iniziale
-        });
-    </script>
-</body>
-</html>
