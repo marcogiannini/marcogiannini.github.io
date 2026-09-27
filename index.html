@@ -1,63 +1,703 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Quello del pacco</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-		<meta name="google-site-verification" content="UK396uHefi32mGcM1ixB2WPx6CbgwWKoSyRg8rTE45M" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Marco Giannini</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile2.jpg" alt="..." /></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-            </div>																		  
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Giannini | Portfolio</title>
+    
+    <!-- Fonts: Inter per la leggibilità, Fira Code per il tocco "Tech/Linux" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome per le icone (Aggiornato alla v6.5.2 per supportare il logo di X e Mastodon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #0a0e17; /* Sfondo scuro profondo */
+            --bg-card: #111827; /* Sfondo elementi in rilievo */
+            --bg-card-hover: #1f2937;
+            --accent-color: #00ffcc; /* Verde acqua vivace / Cyan neon */
+            --accent-glow: rgba(0, 255, 204, 0.4);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            
+            --font-main: 'Inter', sans-serif;
+            --font-tech: 'Fira Code', monospace;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-tech);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hamburger menu (Mobile) */
+        .menu-toggle {
+            display: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-tech);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .hero-prefix {
+            font-family: var(--font-tech);
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-secondary);
+            font-family: var(--font-tech);
+            margin-bottom: 2rem;
+            min-height: 3rem; /* Spazio per l'effetto typing */
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--accent-color);
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            font-family: var(--font-tech);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-tags span {
+            background: var(--bg-card);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: var(--font-tech);
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            transition: var(--transition);
+        }
+
+        .tech-tags span:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 30px -15px rgba(0, 255, 204, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .hobby-list {
+            margin-top: 1rem;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .hobby-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .hobby-list li i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-section {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px dashed var(--accent-color);
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-family: var(--font-tech);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .card-link:hover {
+            gap: 0.8rem;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .podcast-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .podcast-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .podcast-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-tech);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .social-item i {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .social-item:hover i, .social-item:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-family: var(--font-tech);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 14, 23, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                z-index: -1;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo"><i class="fa-solid fa-terminal"></i> marco<span>giannini</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Chi Sono</a></li>
+                <li><a href="#progetti">Progetti</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
         </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="about">
-                <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Marco
-                        <span class="text-primary">Giannini</span>
-                    </h1>
-                    <div class="subheading mb-5">
-                        (Quello del pacco) ·
-                        <a href="https://www.marcosbox.com/">Marco's Box</a><br>
-                        <a href="mailto:name@email.com">giannini.marco@gmail.com</a><br>
-			<a href="marcogiannini.github.io/curriculum/curriculum_giannini_marco.pdf" target="_blank">Curriculum Vitae</a>
-                    </div>
-                    <p class="lead mb-5">Sono Marco Giannini, sostenitore del software libero e open source. Sul web sono conosciuto ai più per essere l'autore del sito internet Marco's Box. Per mantenermi faccio diversi lavori. La mattina lavoro come impiegato presso la Fondedil, società che si occupa di produzione e vendita di materiale acquedottistico, il pomeriggio lavoro presso uno studio di amministrazione condominiale e immobiliare ed infine collaboro con uno studio tecnico di geometri. Nel tempo libero coltivo la mia passione per l'informatica. Online mi trovate su:</p>
-                    <div class="social-icons">
-                        <a class="social-icon" href="https://it.linkedin.com/pub/marco-giannini/51/979/a4a/"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="social-icon" href="https://github.com/marcogiannini"><i class="fab fa-github"></i></a>
-                        <a class="social-icon" href="https://twitter.com/Marcooo83"><i class="fab fa-twitter"></i></a>
-                        <a class="social-icon" href="https://www.facebook.com/pages/Marcos-Box/204256869707263"><i class="fab fa-facebook-f"></i></a>
-                        <a class="social-icon" href="https://youtube.com/@quellodelpacco"><i class="fab fa-youtube"></i></a>
-                        <a class="social-icon" href="https://t.me/marcosbox"><i class="fab fa-telegram"></i></a>
-                        <a class="social-icon" href="https://anchor.fm/marcosbox"><i class="fa-solid fa-podcast"></i></a>
-                    </div>
+    </header>
+
+    <section id="home" class="hero">
+        <p class="hero-prefix">~$ whoami</p>
+        <h1>Marco Giannini</h1>
+        <div class="subtitle">
+            <span id="typewriter-text"></span><span class="typing-cursor"></span>
+        </div>
+        <p style="color: var(--text-secondary); max-width: 500px; margin-bottom: 3rem;">
+            Specializzato in documentazione tecnica, amministrazione IT e divulgazione tecnologica. 
+            Appassionato del mondo open-source e della creatività digitale.
+        </p>
+        <div class="hero-buttons">
+            <a href="#progetti" class="btn">Scopri i miei progetti</a>
+            <a href="curriculum_marco_giannini.pdf" target="_blank" class="btn btn-outline"><i class="fa-solid fa-file-pdf"></i> Visualizza CV</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">01. Chi Sono</h2>
+        <div class="about-content">
+            <div>
+                <p>
+                    Ciao! Sono Marco Giannini. Il mio percorso si divide tra la gestione professionale e la profonda passione per la tecnologia. 
+                    Sono la mente e la voce dietro <span class="highlight">Marco's Box</span>, un ecosistema digitale (blog tech, podcast e canale YouTube) 
+                    dove condivido la mia esperienza e le mie scoperte nel mondo informatico.
+                </p>
+                <p>
+                    Sono un fiero sostenitore del panorama <span class="highlight">Open Source</span> e un utente appassionato di sistemi Linux. 
+                    Nel corso degli anni ho esplorato a fondo distribuzioni come <strong>Ubuntu, Arch Linux e Fedora</strong>, facendone non solo i miei strumenti 
+                    quotidiani, ma anche argomenti di divulgazione per aiutare altri utenti ad avvicinarsi a questo mondo.
+                </p>
+                <p>
+                    Dal punto di vista professionale, ho un solido background nella gestione di <strong>documentazione tecnica e amministrativa</strong>. 
+                    Le mie esperienze, in particolare presso <em>Fondedil S.r.l.</em> e nel settore dell'<em>amministrazione condominiale</em>, 
+                    mi hanno dotato di precisione, capacità di problem-solving e un'attitudine metodica che applico anche nei miei progetti digitali.
+                </p>
+            </div>
+            <div class="tech-tags">
+                <span>Linux (Ubuntu, Arch, Fedora)</span>
+                <span>Open Source</span>
+                <span>Tech Blogging</span>
+                <span>Podcasting</span>
+                <span>Video Editing</span>
+                <span>Technical Writing</span>
+                <span>SysAdmin Basics</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="progetti">
+        <h2 class="section-title">02. Progetti e Interessi</h2>
+        <div class="projects-grid">
+            
+            <div class="card">
+                <i class="fa-solid fa-box-open card-icon"></i>
+                <h3 class="card-title">Marco's Box</h3>
+                <p class="card-desc">
+                    Il mio progetto principale: un blog, un podcast e un canale YouTube dedicati al mondo tech, a Linux e all'open source. 
+                    Uno spazio dove la tecnologia viene spiegata, testata e discussa.
+                </p>
+                <a href="https://www.marcosbox.org" target="_blank" class="card-link">Visita Marco's Box <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-shield-halved card-icon"></i>
+                <h3 class="card-title">Privacy & Sicurezza</h3>
+                <p class="card-desc">
+                    Divulgazione focalizzata sulla sicurezza digitale e la privacy online. 
+                    Studio e condivido best practices, tool open-source e configurazioni per proteggere i propri dati nel web moderno.
+                </p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-microphone-lines card-icon"></i>
+                <h3 class="card-title">Marco's Box Podcast</h3>
+                <p class="card-desc">
+                    Tech, Linux e Open Source in formato audio. Ascolta le ultime novità, guide, interviste e approfondimenti direttamente sulle tue piattaforme di streaming preferite.
+                </p>
+                <div class="podcast-links">
+                    <a href="#" target="_blank" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                    <a href="#" target="_blank" aria-label="Apple Podcasts"><i class="fa-solid fa-podcast"></i></a>
+                    <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" target="_blank" aria-label="RSS Feed"><i class="fa-solid fa-rss"></i></a>
                 </div>
-            </section>
-            <hr class="m-0" />
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-heart card-icon"></i>
+                <h3 class="card-title">Hobby & Passioni</h3>
+                <p class="card-desc">
+                    Lontano (ma non troppo) dai monitor, mi piace esplorare mondi diversi e nutrire la mia curiosità. Le mie passioni principali includono:
+                </p>
+                <ul class="hobby-list">
+                    <li><i class="fa-solid fa-microchip"></i> Tecnologia e Innovazione</li>
+                    <li><i class="fa-solid fa-book-open"></i> Lettura</li>
+                    <li><i class="fa-solid fa-headphones-simple"></i> Musica</li>
+                    <li><i class="fa-solid fa-film"></i> Cinema</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contatti">
+        <div class="contact-section">
+            <h2 class="section-title">03. Contatti</h2>
+            <p>
+                Sono sempre interessato a nuove collaborazioni, discussioni sull'open source o semplicemente per fare due chiacchiere su Linux e tecnologia. 
+                La mia inbox è sempre aperta!
+            </p>
+            <a href="mailto:tuamail@esempio.it" class="btn"><i class="fa-solid fa-envelope"></i> Scrivimi un Messaggio</a>
+            
+            <div class="social-grid">
+                <a href="https://github.com/marcogiannini" target="_blank" class="social-item">
+                    <i class="fa-brands fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://linkedin.com/in/tuoprofilolinkedin" target="_blank" class="social-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://youtube.com/c/tuocanale" target="_blank" class="social-item">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://x.com/tuoprofilo" target="_blank" class="social-item">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <span>X (Twitter)</span>
+                </a>
+                <a href="https://mastodon.uno/@magi" target="_blank" class="social-item">
+                    <i class="fa-brands fa-mastodon"></i>
+                    <span>Mastodon</span>
+                </a>
+                <a href="https://t.me/marcosbox" target="_blank" class="social-item">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/marcogiannini" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/tuoprofilolinkedin" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://youtube.com/c/tuocanale" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://x.com/tuoprofilo" target="_blank" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://mastodon.uno/@magi" target="_blank" aria-label="Mastodon"><i class="fa-brands fa-mastodon"></i></a>
+            <a href="https://t.me/marcosbox" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+        <p class="copyright">
+            <i class="fa-solid fa-code" style="color: var(--accent-color);"></i> & Progettato da Marco Giannini &copy; 2026.
+        </p>
+    </footer>
+
+    <script>
+        // Menu Mobile Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Cambia icona
+            const icon = mobileMenu.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Chiudi menu quando si clicca un link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Typewriter Effect per l'Hero Section
+        const textToType = "Content Creator | Tech Enthusiast | Open Source Advocate";
+        const typeContainer = document.getElementById('typewriter-text');
+        let index = 0;
+        let isTyping = true;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                typeContainer.innerHTML += textToType.charAt(index);
+                index++;
+                // Velocità random per simulare la battitura umana
+                setTimeout(typeWriter, Math.random() * 50 + 50); 
+            }
+        }
+
+        // Avvia l'effetto appena la pagina è caricata
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000); // Piccola pausa iniziale
+        });
+    </script>
+</body>
 </html>
